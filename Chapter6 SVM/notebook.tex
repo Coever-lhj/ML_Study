@@ -1,0 +1,522 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{SVM-Copy1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Table of Contents{}
+
+{{1~~}Introduction to SVM (Linear SVN)}
+
+{{1.1~~}hyperplane(초평면)}
+
+{{1.2~~}Margin(마진)}
+
+{{1.3~~}목적식과 제약식 정의}
+
+{{1.4~~}라그랑지안 문제로 변환}
+
+{{1.5~~}Dual 문제로 변환}
+
+{{1.6~~}SVM의 해}
+
+{{2~~}C-SVM : Imperfect seperation}
+
+    \subsection{Introduction to SVM (Linear
+SVN)}\label{introduction-to-svm-linear-svn}
+
+    \subsubsection{hyperplane(초평면)}\label{hyperplaneuxcd08uxd3c9uxba74}
+
+\$ ~\$ 두 범주를 나누는 분류 문제를 푼다고 가정해 보겠습니다. 아래
+그림에서 직선이 두 클래스를 무난하게 분류하고 있음을 확인할 수 있습니다.
+
+\$ ~\$ 아래 그림 \textbf{B, C, D} 중 어느 \textbf{hyperplane}이 더
+클래스를 잘 분류할까요?
+
+\$ ~\$ 정답은 \textbf{D}로 나머지 \textbf{hyperplane}보다 확연하게
+분류를 합니다.
+
+\subsubsection{Margin(마진)}\label{marginuxb9c8uxc9c4}
+
+\$ ~\$ 위에서 초평면을 언급했지만, Margin을 설명하기 위해 다시 한번 아래
+그림을 봐주세요. 그림에서 초평면 B1과 B2 모두 두 클래스를 무난하게
+분류하고 있음을 확인할 수 있습니다.
+
+\$ ~\$ 위 그림에서 \textbf{b12}을 \textbf{minus-plane}, \textbf{b11}을
+\textbf{plus-plane}, 이 둘 사이의 거리를 \textbf{마진(margin)}이라고
+합니다. \textbf{SVM은 이 마진을 최대화하는 분류 경계면을 찾는
+기법입니다. } 이를 도식적으로 나타내면 아래와 같습니다.
+
+\$ ~\$ 그럼 마진의 길이가 얼마인지 유도해보겠습니다. 우선 우리가 찾아야
+하는 분류경계면을 \textbf{\(w^Tx + b\)} 라고 둡시다. 그러면 \textbf{벡터
+\(w\)는 이 경계면과 수직인 법선벡터}가 됩니다.
+
+\$ ~\$ \textbf{\(w\)} 를 2차원 벡터 \((w_1,w_2)^T\)라고 두겠습니다.
+\textbf{\(w\)} 에 대해 원점과의 거리가 \(b\)인 직선의 방정식은
+\(w^Tx + b\) = \(w_1x_1 + w_2x_2 + b = 0\) 이 됩니다. 이 직선의 기울기는
+\(-\frac{w_1}{w_2}\)이고, 법선벡터 \(w\)의 기울기는 \(\frac{w_2}{w_1}\)
+이므로 두 직선은 서로 수직입니다. 이를 차원을 확장하여 생각해도 마찬가지
+입니다.
+
+\$ ~\$ 어쨌든 이 사실을 바탕으로 plus-plane 위에 있는 벡터 \(x^+\) 와
+\(x^−\) 사이의 관계를 다음과 같이 정의할 수 있습니다. \(x^−\)를 \(w\)
+방향으로 \textbf{평행이동시키되} 이동 폭은 \(\lambda\)로
+\textbf{스케일}한다는 취지입니다.
+
+\[
+x^+ = x^- + \lambda w
+\]
+
+\$ ~\$ 그럼 \(\lambda\)은 어떤 값을 지닐까요? \(x^+\)는 plus-plane,
+\(x^-\)는 minus-plane 위에 있다는 사실과 \(x^+\)와 \(x^−\) 사이의
+관계식을 활용하면 다음과 같이 유도해낼 수 있습니다.
+
+\$ ~\$ 마진은 plus-plane과 minus-plane 사이의 거리를 의미합니다. 이는
+\(x^+\)와 \(x^-\) 사이의 거리와 같습니다. 둘 사이의 관계식과
+\(\lambda\)값을 알고 있으므로 식을 정리하면 마진을 다음과 같이 유도할 수
+있습니다.
+
+    \subsubsection{목적식과 제약식
+정의}\label{uxbaa9uxc801uxc2dduxacfc-uxc81cuxc57duxc2dd-uxc815uxc758}
+
+\$ ~\$ SVM의 목적은 마진을 최대화하는 경계면을 찾는 것입니다. 계산상
+편의를 위해 마진 절반을 제곱한 것에 역수를 취한 뒤 그 절반을 최소화하는
+문제로 바꾸겠습니다. 이렇게 해도 문제의 본질은 바뀌지 않습니다.
+
+\textbf{object function (목적식)} \[
+max \frac{2}{||w||_2} \rightarrow min \frac{1}{2}w^Tw
+\]
+
+\textbf{subject to (제약식)} \[
+y_i(w^Tx_i+b)≥1 
+\]
+
+\$ ~\$ 여기엔 다음과 같은 제약조건이 관측치 개수만큼 붙습니다. 식의
+의미는 이렇습니다. plus-plane보다 위에 있는 관측치들은 y=1이고
+\(w^Tx+b\)가 1보다 큽니다. 반대로 minus-plane보다 아래에 있는 점들은
+y=−1이고 \(w^Tx+b\)가 -1보다 작습니다. 이 두 조건을 한꺼번에 묶으면 위와
+같은 제약식이 됩니다.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\$ ~\$ \textbf{This is a convex, \href{}{quadratic programming
+problem}(in \(w\), \(b\)), in a
+\href{https://ratsgo.github.io/convex\%20optimization/2017/12/25/convexset/}{convex
+set}.}\\
+\textbf{Introducing Lagrange multipliers \(\alpha_1\), \(\alpha_2\),
+\(\alpha_3\), ... \(\alpha_N\) \(\ge\) 0, we have following Lagrangian:}
+
+\[
+min \ L_p(w,b,\alpha_i) = \frac{1}{2}w^Tw - \sum_{i=1}^N \alpha_i y_i(wx_i+b) + \sum_{i=1}^N \alpha_i 
+\]
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{quote}
+라그랑지안이 갑자기 나와서 많이들 놀라셨을텐데 겁내지 마시고 아래
+동영상을 보면서 차분히 접근해봅시다.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{io}
+         \PY{k+kn}{import} \PY{n+nn}{base64}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+         \PY{c+c1}{\PYZsh{} 설정 \PYZhy{} 자막 \PYZhy{} 자동번역 \PYZhy{} 원하는 언어 선택}
+         \PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}iframe width=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{800}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ height=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{450}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ src=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{https://www.youtube.com/embed/yuqB\PYZhy{}d5MjZA}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ frameborder=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ allow=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{autoplay; encrypted\PYZhy{}media}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ allowfullscreen\PYZgt{}\PYZlt{}/iframe\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \subsubsection{라그랑지안 문제로
+변환}\label{uxb77cuxadf8uxb791uxc9c0uxc548-uxbb38uxc81cuxb85c-uxbcc0uxd658}
+
+\$ ~\$ 라그랑지안 승수법(Lagrange multiplier method)은 제약식에 형식적인
+라그랑지안 승수를 곱한 항을 최적화하려는 목적식에 더하여, \textbf{제약된
+문제를 제약이 없는 문제로 바꾸는 기법}입니다. 이에 대해 추가적인 내용은
+\href{https://datascienceschool.net/view-notebook/0c66f1810445488baf19cac79305793b/}{이곳}을
+참고하면 좋을 것 같습니다.
+
+\begin{quote}
+\textbf{데이터 사이언스 스쿨}들어가셔서 두번째 내용인 \textbf{{[}부등식
+제한 조건이 있는 최적화 문제{]}} 중심으로 보세요.
+\end{quote}
+
+\textbf{object function (목적식)}
+
+\[
+min \ L_P(w,b,\alpha_i) = \frac{1}{2}w^Tw - \sum_{i=1}^N \alpha_i y_i(wx_i+b) + \sum_{i=1}^N \alpha_i 
+\]
+
+\textbf{subject to (제약식)}
+
+\[
+\alpha_i \ge 0, \qquad i = 1, .... N
+\]
+
+위의 제약식은 KKT(Karush-Kuhn-Tucker) 조건 중 \textbf{(3) 음수가 아닌
+라그랑지 승수} 조건에 의해 생성 -\textgreater{} ???????(확인 필요)
+
+\subsubsection{Dual 문제로
+변환}\label{dual-uxbb38uxc81cuxb85c-uxbcc0uxd658}
+
+\$ ~\$ KKT 조건에서는 \(L_p(w,b,\alpha_i)\) 를 미지수로 각각 편미분한
+식이 0이 되는 지점에서 최소값을 갖습니다. 다음과 같습니다.
+
+\$ ~\$ 위 식을 \(L_p(w,b,\alpha_i)\) 에 넣어 정리해 보겠습니다.
+
+우선 \textbf{첫번째 항}부터 보겠습니다.
+
+\$ ~\$ 이번엔 \textbf{두번째 항}입니다.
+
+\$ ~\$ 지금까지 도출한 결과를 토대로 \(L_p(w,b,\alpha_i)\)를 정리하면
+다음과 같습니다. 식을 변형하는 과정에서 \(\alpha\)에 관한 식으로
+간단해졌습니다. \(\alpha\)의 최고차항의 계수가 음수이므로 최소값을 찾는
+문제가 최대값을 찾는 문제로 바뀌었습니다. 이로써 \textbf{Dual 문제}로
+변환된 것입니다.
+
+\[
+max \ L_D(\alpha_i) = \sum_{i=1}^N \alpha_i \ - \ \frac{1}{2}\sum_{i=1}^N \sum_{j=1}^N \alpha_i\alpha_jy_iy_jx_i^Tx_j
+\]
+
+    \$ ~\$ KKT 조건에 의해 \(L_D\) 의 제약식은 다음과 같습니다.
+
+\[
+\sum_{i=1}^N \alpha_iy_i = 0
+\]
+
+\[
+\alpha_i \ge 0, \qquad i = 1, .... N
+\]
+
+\begin{quote}
+혹시 위에서 언급한 primal, daul에 대한 \(L_p(w,b,\alpha_i)\) 가
+\(\ L_D(\alpha_i)\)로 변하는 과정에 대해 감이 안오신다면
+\href{http://secom.hanbat.ac.kr/or/ch04/right04.html}{{[}쌍대이론과
+민감도{]}}을 참고하세요.
+
+"선형계획법" 예제입니다. 출퇴근하시면서 보시면 좋을 것 같습니다. 혹시나
+궁금하신점 있으시면 일요일 전에 미리 말씀해주세요(지난학기에
+재수강??..)기억이 나려고 해요....
+\end{quote}
+
+\subsubsection{SVM의 해}\label{svmuxc758-uxd574}
+
+\$ ~\$ 우리가 찾고자 한 답은 마진이 최대화된 분류경계면
+\(w^Tx+b\)입니다. \(w\)와 \(b\)를 찾으면 SVM의 해를 구할 수 있게 됩니다.
+KKT 조건을 탐색하는 과정에서 \(w\)는 다음과 같이 도출됐습니다.
+
+\[
+W =  \sum_{i=1}^N \alpha_iy_ix_i 
+\]
+
+\$ ~\$ \(x_i\)와 \(y_i\)는 우리가 가지고 있는 학습데이터이므로
+라그랑지안 승수인 \(\alpha\) 값들만 알면 \(w\)를 찾을 수 있습니다.
+그런데 여기에서 \(\alpha_i\)가 0인 관측치들은 분류경계면 형성에 아무런
+영향을 끼치지 못합니다. 바꿔 말해 \(i\)번째 관측치에 대응하는 라그랑지안
+승수\(\alpha_i\)가 0보다 커야 마진 결정에 유의미하다는 이야기입니다.
+
+\$ ~\$ 아울러 KKT 조건에 의해 해당 함수가 최적값을 갖는다면 아래 두 개
+가운데 하나는 반드시 0입니다.
+
+    \[
+\alpha_i = 0 \ 또는 \  y_i(w^Tx_i + b -1) = 0
+\]
+
+\$ ~\$ \(\alpha_i\) 가 0이 아니라면 \(y_i(w^Tx_i + b -1)\)가 반드시
+0입니다. 따라서 \(x_i\)는 plus-plane 또는 minus-plane 위에 있는 벡터가
+됩니다. 이렇게 마진 결정에 영향을 끼치는 관측치들을 서포트 벡터(support
+vectors)라고 합니다. 아래 그림과 같습니다.
+
+\$ ~\$ 한편 \(b\)는 이미 구한 \(w\)와 학습데이터,
+\(y_i(w^Tx_i + b -1)=0\) 식을 활용해 바로 구할 수 있게 됩니다. 새로운
+데이터가 들어왔을 때는 해당 관측치를 \(y_i(w^Tx_i + b -1)\) 에 넣어서
+0보다 크면 1, 0보다 작으면 -1 범주로 예측하면 됩니다.
+
+    \subsection{C-SVM : Imperfect
+seperation}\label{c-svm-imperfect-seperation}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
